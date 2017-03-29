@@ -1,0 +1,18 @@
+{
+  "name": "active-editor-info",
+  "main": "./lib/active-editor-info",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "active-editor-info:toggle"
+  },
+  "repository": "https://github.com/atom/active-editor-info",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

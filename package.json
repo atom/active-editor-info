@@ -3,8 +3,7 @@
   "main": "./lib/active-editor-info",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-workspace": "active-editor-info:toggle"
   },
@@ -14,6 +13,8 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "deserializers": {
     "active-editor-info/ActiveEditorInfoView": "deserializeActiveEditorInfoView"

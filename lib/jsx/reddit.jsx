@@ -5,72 +5,68 @@ var ReactDOM = require('react-dom');
 var redditAuth = require('../utils/redditAuth');
 
 class PostListItem extends React.Component {
-    constructor(props){
-        super(props);
-
-        if (props.hasOwnProperty('post')){
-            this.state = props.post;
-        }
-        else{
-            this.state = props;
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    //     console.log("Constructed post item", post);
+    // }
 
     render() {
-        return (
-            <div id={this.state.id}>
-                <img src={this.state.thumbnail}></img>
-                <p><h3>{this.state.title}</h3> <p>by /u/{this.state.author}</p></p>
-            </div>
-        );
+        console.log("Rendered post item", this.props);
+        return (<div id={this.props.id}>
+            <img src={this.props.thumbnail}></img>
+            <p>
+                <h3>{this.props.title}</h3>
+                <p>by /u/{this.props.author}</p>
+            </p>
+        </div>);
     }
 }
 
 class PostList extends React.Component {
-    constructor(props){
-        super(props);
-
-        if(!props.hasOwnProperty('list')){
-            props = {'list': []};
-        }
-
-        this.state.list = props.list.map(post => {
-            return (<li>
-                <PostListItem post={post}></PostListItem>
-            </li>)
-        });
-    }
+    // constructor(props) {
+    //     super(props);
+    //     console.log("Constructing Post List", props);
+    // }
 
     render() {
-        <ul>
-            {this.state.list}
-        </ul>
+        console.log("Rendered post list", this.props);
+        var list = this.props.list.map(post => {
+            return (<li>
+                <PostListItem id={post.id} thumbnail={post.thumbnail} title={post.title} author={post.author}></PostListItem>
+            </li>)
+        });
+
+        return (<ul>
+            {list}
+        </ul>);
     }
 }
 
 module.exports = class Reddit extends React.Component {
     constructor(props) {
         super(props);
+        console.log("Constructed reddit", props);
 
         this.state = {
-            original: props
+            list: []
         };
 
         redditAuth(props).then(snoowrap => {
             snoowrap.getHot().then(posts => {
-                this.setState({
-                    'list': posts
+                console.log("Downloaded hot", posts.map(x => x.title));
+                this.setState({'list': posts}, () => {
+                    console.log("Reddit state altered");
+                    this.forceUpdate();
                 });
             });
         });
     }
 
     render() {
-        return (
-            <div>
-                <h1>Reddit</h1>
-                <PostList list={this.state.list}></PostList>
-            </div>
-        );
+        console.log("Rendered reddit", this.state);
+        return (<div>
+            <h1>Reddit</h1>
+            <PostList list={this.state.list}/>
+        </div>);
     }
 };

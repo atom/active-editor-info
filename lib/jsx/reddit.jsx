@@ -22,15 +22,23 @@ module.exports = class Reddit extends React.Component {
         super(props);
 
         this.state = {
-            reddit: new snoowrap(props)
-        }
+            original: props
+        };
+
+        redditAuth(props).then(snoowrap => {
+            snoowrap.getHot().then(posts => {
+                this.setState({
+                    'list': posts
+                });
+            });
+        });
     }
 
     render() {
         return (
             <div>
                 <h1>Reddit</h1>
-
+                <PostList list={this.state.list}></PostList>
             </div>
         );
     }

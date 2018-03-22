@@ -1,23 +1,31 @@
 {
-  "name": "active-editor-info",
-  "main": "./lib/active-editor-info",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [],
-  "activationCommands": {
-    "atom-workspace": "active-editor-info:toggle"
-  },
-  "repository": "https://github.com/atom/active-editor-info",
-  "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
-  "dependencies": {
-    "node": "^9.8.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
-  },
-  "deserializers": {
-    "active-editor-info/ActiveEditorInfoView": "deserializeActiveEditorInfoView"
-  }
+	"name": "active-editor-info",
+	"main": "./lib/active-editor-info",
+	"version": "0.0.0",
+	"description": "A short description of your package",
+	"keywords": [],
+	"activationCommands": {
+		"atom-workspace": "active-editor-info:toggle"
+	},
+	"repository": "https://github.com/atom/active-editor-info",
+	"license": "MIT",
+	"engines": {
+		"atom": ">=1.0.0 <2.0.0"
+	},
+	"dependencies": {
+		"build-url": "^1.0.10",
+		"node": "^9.8.0",
+		"openurl": "^1.1.1",
+		"randomstring": "^1.1.5",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"request": "^2.85.0",
+		"snoowrap": "^1.15.2"
+	},
+	"deserializers": {
+		"active-editor-info/ActiveEditorInfoView": "deserializeActiveEditorInfoView"
+	},
+	"scripts": {
+		"test": "node test.js"
+	}
 }

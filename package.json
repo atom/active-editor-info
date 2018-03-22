@@ -15,6 +15,7 @@
 	"dependencies": {
 		"build-url": "^1.0.10",
 		"node": "^9.8.0",
+		"open": "0.0.5",
 		"openurl": "^1.1.1",
 		"randomstring": "^1.1.5",
 		"react": "^16.2.0",

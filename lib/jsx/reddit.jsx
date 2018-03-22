@@ -2,7 +2,29 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-const snoowrap = require('snoowrap');
+var redditAuth = require('../utils/redditAuth');
+
+class PostListItem extends React.Component {
+    constructor(props){
+        super(props);
+
+        if (props.hasOwnProperty('post')){
+            this.state = props.post;
+        }
+        else{
+            this.state = props;
+        }
+    }
+
+    render() {
+        return (
+            <div id={this.state.id}>
+                <img src={this.state.thumbnail}></img>
+                <p><h3>{this.state.title}</h3> <p>by /u/{this.state.author}</p></p>
+            </div>
+        );
+    }
+}
 
 class PostList extends React.Component {
     constructor(props){

@@ -7,13 +7,22 @@ const snoowrap = require('snoowrap');
 class PostList extends React.Component {
     constructor(props){
         super(props);
-        this.state = props;
+
+        if(!props.hasOwnProperty('list')){
+            props = {'list': []};
+        }
+
+        this.state.list = props.list.map(post => {
+            return (<li>
+                <PostListItem post={post}></PostListItem>
+            </li>)
+        });
     }
 
     render() {
-        const items = this.state.map(x => {
-            
-        })
+        <ul>
+            {this.state.list}
+        </ul>
     }
 }
 

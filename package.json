@@ -13,6 +13,7 @@
 		"atom": ">=1.0.0 <2.0.0"
 	},
 	"dependencies": {
+		"bootstrap": "^4.0.0",
 		"build-url": "^1.0.10",
 		"node": "^9.8.0",
 		"open": "0.0.5",
@@ -20,6 +21,7 @@
 		"randomstring": "^1.1.5",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
+		"reactstrap": "^5.0.0-beta.3",
 		"request": "^2.85.0",
 		"snoowrap": "^1.15.2"
 	},

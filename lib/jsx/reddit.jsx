@@ -12,7 +12,8 @@ class PostListItem extends React.Component {
 
     render() {
         console.log("Rendered post item", this.props);
-        return (<div id={this.props.id}>
+        return (
+        <div id={this.props.id}>
             <img src={this.props.thumbnail}></img>
             <p>
                 <h3>{this.props.title}</h3>

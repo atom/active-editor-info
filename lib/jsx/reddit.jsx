@@ -90,7 +90,7 @@ class PostList extends React.Component {
         console.log("Rendered post list", this.props);
         var list = this.props.list.map(post => {
             return (<li>
-                <PostListItem id={post.id} thumbnail={post.thumbnail} title={post.title} author={post.author} votes={post.votes}></PostListItem>
+                <PostListItem post={post} snoowrap={this.props.snoowrap}></PostListItem>
             </li>)
         });
 
@@ -110,6 +110,9 @@ module.exports = class Reddit extends React.Component {
         };
 
         redditAuth(props).then(snoowrap => {
+            this.setState({
+                'snoowrap': snoowrap
+            });
             snoowrap.getHot().then(posts => {
                 console.log("Downloaded hot", posts.map(x => x.title));
                 this.setState({
@@ -126,7 +129,7 @@ module.exports = class Reddit extends React.Component {
         console.log("Rendered reddit", this.state);
         return (<div>
             <h1>Reddit</h1>
-            <PostList list={this.state.list}/>
+            <PostList list={this.state.list} snoowrap={this.state.snoowrap}/>
         </div>);
     }
 };

@@ -15,50 +15,64 @@ class PostFunction extends React.Component {
 }
 
 class PostListItem extends React.Component {
-    upvote(id) {}
+    constructor(props){
+        super(props);
 
-    downvote(id) {}
+        this.state = {
+            'snoowrap': props.snoowrap
+        };
+    }
 
-    comments(id) {}
 
-    share(id) {}
+    upvote(post) {
+        post.upvote().then(() => console.log(`Upvoted ${post.id}`));
+    }
 
-    save(id) {}
+    downvote(post) {
+        post.downvote().then(() => console.log(`Upvoted ${post.id}`));
+    }
 
-    hide(id) {}
+    comments(post) {}
 
-    report(id) {}
+    share(post) {}
 
-    crosspost(id) {}
+    save(post) {}
+
+    hide(post) {}
+
+    report(post) {}
+
+    crosspost(post) {}
 
     render() {
         console.log("Rendered post item", this.props);
-        return (<div id={this.props.id} className="PostItem grid-container">
+        const post = this.props.post;
+        return (<div id={post.id} className="PostItem grid-container">
             <div className="grid-item thumbnail">
-                <img src={this.props.thumbnail} alt={this.props.thumbnail}/>
+                <img src={post.thumbnail} alt={post.thumbnail}/>
             </div>
             <div className="grid-item title">
-                <h2>{this.props.title}</h2>
-                <p>by /u/{this.props.author}</p>
+                <h2>{post.title}</h2>
+                <p>by /u/{post.author}</p>
             </div>
             <div className="grid-item functions">
                 <ul>
-                    <PostFunction text="comments" onClick={this.comments(this.props.id)}/>
-                    <PostFunction text="share" onClick={this.share(this.props.id)}/>
-                    <PostFunction text="save" onClick={this.save(this.props.id)}/>
-                    <PostFunction text="hide" onClick={this.hide(this.props.id)}/>
-                    <PostFunction text="report" onClick={this.report(this.props.id)}/>
-                    <PostFunction text="crosspost" onClick={this.crosspost(this.props.id)}/>
+                    <PostFunction text="comments" onClick={this.comments(post)}/>
+                    <PostFunction text="share" onClick={this.share(post)}/>
+                    <PostFunction text="save" onClick={this.save(post)}/>
+                    <PostFunction text="hide" onClick={this.hide(post)}/>
+                    <PostFunction text="report" onClick={this.report(post)}/>
+                    <PostFunction text="crosspost" onClick={this.crosspost(post)}/>
                 </ul>
             </div>
             <div className="grid-item vote">
-                <button className="upvote clean" onClick={this.upvote(this.props.id)}>
+                <button className="upvote clean" onClick={this.upvote(post)}>
                     🡅
                 </button>
                 <div className="votes">
-                    <p>{this.props.votes}</p>
+                    <p>{post.votes}</p>
                 </div>
-                <button className="downvote clean" onClick={this.downvote(this.props.id)}>
+                <button className="downvote clean" onClick={this.downvote(post)}>
                     🡇
                 </button>
             </div>

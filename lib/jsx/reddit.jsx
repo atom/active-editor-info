@@ -109,18 +109,13 @@ module.exports = class Reddit extends React.Component {
             list: []
         };
 
-        redditAuth(props).then(snoowrap => {
+        props.snoowrap.getHot().then(posts => {
+            console.log("Example post", posts[0]);
             this.setState({
-                'snoowrap': snoowrap
-            });
-            snoowrap.getHot().then(posts => {
-                console.log("Downloaded hot", posts.map(x => x.title));
-                this.setState({
-                    'list': posts
-                }, () => {
-                    console.log("Reddit state altered");
-                    this.forceUpdate();
-                });
+                'list': posts
+            }, () => {
+                console.log("Reddit hot state altered");
+                this.forceUpdate();
             });
         });
     }

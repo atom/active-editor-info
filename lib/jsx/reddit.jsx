@@ -15,34 +15,34 @@ class PostFunction extends React.Component {
 }
 
 class PostListItem extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            'snoowrap': props.snoowrap
+            'snoowrap': props.snoowrap,
+            'post': props.post
         };
     }
 
-
-    upvote(post) {
-        post.upvote().then(() => console.log(`Upvoted ${post.id}`));
+    upvote() {
+        this.state.post.upvote().then(() => console.log(`Upvoted ${post.id}`));
     }
 
-    downvote(post) {
-        post.downvote().then(() => console.log(`Upvoted ${post.id}`));
+    downvote() {
+        this.state.post.downvote().then(() => console.log(`Upvoted ${post.id}`));
     }
 
-    comments(post) {}
+    comments() {}
 
-    share(post) {}
+    share() {}
 
-    save(post) {}
+    save() {}
 
-    hide(post) {}
+    hide() {}
 
-    report(post) {}
+    report() {}
 
-    crosspost(post) {}
+    crosspost() {}
 
     render() {
         console.log("Rendered post item", this.props);
@@ -53,26 +53,26 @@ class PostListItem extends React.Component {
             </div>
             <div className="grid-item title">
                 <h2>{post.title}</h2>
-                <p>by /u/{post.author}</p>
+                <p>by /u/{post.author.name}</p>
             </div>
             <div className="grid-item functions">
                 <ul>
-                    <PostFunction text="comments" onClick={this.comments(post)}/>
-                    <PostFunction text="share" onClick={this.share(post)}/>
-                    <PostFunction text="save" onClick={this.save(post)}/>
-                    <PostFunction text="hide" onClick={this.hide(post)}/>
-                    <PostFunction text="report" onClick={this.report(post)}/>
-                    <PostFunction text="crosspost" onClick={this.crosspost(post)}/>
+                    <PostFunction text={`${post.num_comments} comments`} onClick={this.comments}/>
+                    <PostFunction text="share" onClick={this.share}/>
+                    <PostFunction text="save" onClick={this.save}/>
+                    <PostFunction text="hide" onClick={this.hide}/>
+                    <PostFunction text="report" onClick={this.report}/>
+                    <PostFunction text="crosspost" onClick={this.crosspost}/>
                 </ul>
             </div>
             <div className="grid-item vote">
-                <button className="upvote clean" onClick={this.upvote(post)}>
+                <button className="upvote clean" onClick={this.upvote}>
                     🡅
                 </button>
                 <div className="votes">
-                    <p>{post.votes}</p>
+                    <p>{post.score}</p>
                 </div>
-                <button className="downvote clean" onClick={this.downvote(post)}>
+                <button className="downvote clean" onClick={this.downvote}>
                     🡇
                 </button>
             </div>
@@ -81,10 +81,6 @@ class PostListItem extends React.Component {
 }
 
 class PostList extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     console.log("Constructing Post List", props);
-    // }
 
     render() {
         console.log("Rendered post list", this.props);
@@ -106,7 +102,8 @@ module.exports = class Reddit extends React.Component {
         console.log("Constructed reddit", props);
 
         this.state = {
-            list: []
+            list: [],
+            'snoowrap': props.snoowrap
         };
 
         props.snoowrap.getHot().then(posts => {
@@ -123,7 +120,7 @@ module.exports = class Reddit extends React.Component {
     render() {
         console.log("Rendered reddit", this.state);
         return (<div>
-            <h1>Reddit</h1>
+            <h1>Reddit - Hot</h1>
             <PostList list={this.state.list} snoowrap={this.state.snoowrap}/>
         </div>);
     }

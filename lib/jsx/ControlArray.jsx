@@ -16,6 +16,12 @@ class PostFunction extends React.Component {
 
 module.exports = class ControlArray extends React.Component {
 
+    _clear() {
+        setTimeout(() => {
+            atom.notifications.clear();
+        }, 1000);
+    }
+
     comments() {}
 
     share() {
@@ -36,14 +42,27 @@ module.exports = class ControlArray extends React.Component {
             console.log('copied!');
 
             atom.notifications.addSuccess("Permalink copied to clipboard", {dismissable: true});
-
-            setTimeout(() => {
-                atom.notifications.clear();
-            }, 1000);
+            this._clear();
         });
     }
 
-    save() {}
+    save() {
+        this.state.post.save().then(() => {
+            atom.notifications.addSuccess("Saved!", {dismissable: true});
+            this._clear();
+        }).catch(e => {
+            atom.notifications.addError("Failed to save", {
+                dismissable: true,
+                buttons: [
+                    {
+                        text: 'Retry',
+                        onDidClick: this.save
+                    }
+                ]
+            });
+            this._clear();
+        });
+    }
 
     hide() {}
 

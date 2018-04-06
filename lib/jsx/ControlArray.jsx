@@ -18,7 +18,30 @@ module.exports = class ControlArray extends React.Component {
 
     comments() {}
 
-    share() {}
+    share() {
+        clip("https://reddit.com" + this.props.post.permalink, function(err) {
+            if (err) {
+                atom.notifications.addError("Failed to copy permalink to clipboard", {
+                    buttons: [
+                        {
+                            text: 'Retry',
+                            onDidClick: this.share
+                        }
+                    ],
+                    stack: err,
+                    dismissable: true
+                });
+                return;
+            }
+            console.log('copied!');
+
+            atom.notifications.addSuccess("Permalink copied to clipboard", {dismissable: true});
+
+            setTimeout(() => {
+                atom.notifications.clear();
+            }, 1000);
+        });
+    }
 
     save() {}
 

@@ -12,6 +12,26 @@ module.exports = class VoteControls extends React.Component {
         };
     }
 
+    _refresh() {
+        this.state.post.fetch().then(p => {
+            this.setState({'post': p});
+        });
+    }
+
+    upvote() {
+        this.state.post.upvote().then(() => {
+            console.log("Upvote", this.state.post);
+            this._refresh();
+        });
+    }
+
+    downvote() {
+        this.state.post.downvote().then(() => {
+            console.log("Upvote", this.state.post);
+            this._refresh();
+        });
+    }
+
     render() {
         return (
             <div>

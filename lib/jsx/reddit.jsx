@@ -3,16 +3,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var redditAuth = require('../utils/redditAuth');
-
-class PostFunction extends React.Component {
-    render() {
-        return (<li>
-            <button className="function" onClick={this.props.onClick}>
-                {this.props.text}
-            </button>
-        </li>);
-    }
-}
+var ControlArray = require('./ControlArray');
 
 class PostListItem extends React.Component {
     constructor(props) {
@@ -29,20 +20,8 @@ class PostListItem extends React.Component {
     }
 
     downvote() {
-        this.state.post.downvote().then(() => console.log(`Upvoted ${post.id}`));
+        this.state.post.downvote().then(() => console.log(`Downvoted ${post.id}`));
     }
-
-    comments() {}
-
-    share() {}
-
-    save() {}
-
-    hide() {}
-
-    report() {}
-
-    crosspost() {}
 
     render() {
         console.log("Rendered post item", this.props);
@@ -56,14 +35,7 @@ class PostListItem extends React.Component {
                 <p>by /u/{post.author.name}</p>
             </div>
             <div className="grid-item functions">
-                <ul>
-                    <PostFunction text={`${post.num_comments} comments`} onClick={this.comments}/>
-                    <PostFunction text="share" onClick={this.share}/>
-                    <PostFunction text="save" onClick={this.save}/>
-                    <PostFunction text="hide" onClick={this.hide}/>
-                    <PostFunction text="report" onClick={this.report}/>
-                    <PostFunction text="crosspost" onClick={this.crosspost}/>
-                </ul>
+                <ControlArray post={post} />
             </div>
             <div className="grid-item vote">
                 <button className="upvote clean" onClick={this.upvote}>

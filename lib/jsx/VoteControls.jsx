@@ -35,13 +35,13 @@ module.exports = class VoteControls extends React.Component {
     render() {
         return (
             <div>
-                <button className="upvote clean" onClick={this.upvote}>
+                <button className={`upvote ${this.state.post.likes === true ? 'enabled' : 'clean'}`} onClick={this.upvote}>
                     🡅
                 </button>
                 <div className="votes">
                     <p>{this.state.post.score}</p>
                 </div>
-                <button className="downvote clean" onClick={this.downvote}>
+                <button className={`downvote ${this.state.post.likes === false ? 'enabled' : 'clean'}`} onClick={this.downvote}>
                     🡇
                 </button>
             </div>

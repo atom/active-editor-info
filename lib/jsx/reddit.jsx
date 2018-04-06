@@ -38,15 +38,7 @@ class PostListItem extends React.Component {
                 <ControlArray post={post} />
             </div>
             <div className="grid-item vote">
-                <button className="upvote clean" onClick={this.upvote}>
-                    🡅
-                </button>
-                <div className="votes">
-                    <p>{post.score}</p>
-                </div>
-                <button className="downvote clean" onClick={this.downvote}>
-                    🡇
-                </button>
+                <VoteControls post={post} />
             </div>
         </div>);
     }

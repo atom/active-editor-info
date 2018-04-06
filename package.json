@@ -16,6 +16,7 @@
 		"bootstrap": "^4.0.0",
 		"build-url": "^1.0.10",
 		"node": "^9.8.0",
+		"node-clipboard": "^1.2.0",
 		"open": "0.0.5",
 		"openurl": "^1.1.1",
 		"randomstring": "^1.1.5",

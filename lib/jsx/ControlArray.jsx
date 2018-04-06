@@ -2,6 +2,7 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var clip = require('node-clipboard');
 
 class PostFunction extends React.Component {
     render() {

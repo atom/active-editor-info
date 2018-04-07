@@ -22,6 +22,24 @@ module.exports = class ControlArray extends React.Component {
         }, 1000);
     }
 
+    _funcThen(m) {
+        atom.notifications.addSuccess(m, {dismissable: true});
+        this._clear();
+    }
+
+    _funcCatch(e, m, r) {
+        atom.notifications.addError(m, {
+            dismissable: true,
+            buttons: [
+                {
+                    text: 'Retry',
+                    onDidClick: r
+                }
+            ]
+        });
+        this._clear();
+    }
+
     comments() {}
 
     share() {
@@ -47,24 +65,26 @@ module.exports = class ControlArray extends React.Component {
     }
 
     save() {
-        this.state.post.save().then(() => {
-            atom.notifications.addSuccess("Saved!", {dismissable: true});
-            this._clear();
-        }).catch(e => {
-            atom.notifications.addError("Failed to save", {
-                dismissable: true,
-                buttons: [
-                    {
-                        text: 'Retry',
-                        onDidClick: this.save
-                    }
-                ]
-            });
-            this._clear();
-        });
+        const post = this.state.post;
+
+        if (post.saved) {
+            post.unsave().then(() => this._funcThen("Unsaved")).catch((e) => this._funcCatch(e, "Failed to unsave", this.save));
+        }
+        else {
+            post.save().then(() => this._funcThen("Saved")).catch((e) => this._funcCatch(e, "Failed to save", this.save));
+        }
     }
 
-    hide() {}
+    hide() {
+        const post = this.state.post;
+
+        if (post.hidden) {
+            post.unhide().then(() => this._funcThen("Post unhidden")).catch((e) => this._funcCatch(e, "Failed to unhide", this.hide));
+        }
+        else {
+            post.hide().then(() => this._funcThen("Post hidden")).catch((e) => this._funcCatch(e, "Failed to hide", this.hide));
+        }
+    }
 
     report() {}
 
@@ -75,8 +95,12 @@ module.exports = class ControlArray extends React.Component {
         return (<ul>
             <PostFunction text={`${post.num_comments} comments`} onClick={this.comments}/>
             <PostFunction text="share" onClick={this.share}/>
-            <PostFunction text="save" onClick={this.save}/>
-            <PostFunction text="hide" onClick={this.hide}/>
+            <PostFunction text={post.saved
+                    ? 'unsave'
+                    : 'save'} onClick={this.save}/>
+            <PostFunction text={post.hidden
+                    ? 'unhide'
+                    : 'hide'} onClick={this.hide}/>
             <PostFunction text="report" onClick={this.report}/>
             <PostFunction text="crosspost" onClick={this.crosspost}/>
         </ul>);

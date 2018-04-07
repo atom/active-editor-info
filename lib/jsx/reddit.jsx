@@ -3,7 +3,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var redditAuth = require('../utils/redditAuth');
-var ControlArray = require('./ControlArray');
+var ControlArray = require('./ControlArray.jsx');
+var VoteControls = require('./VoteControls.jsx');
 
 class PostListItem extends React.Component {
     constructor(props) {

@@ -20,6 +20,8 @@ module.exports = class ControlArray extends React.Component {
         setTimeout(() => {
             atom.notifications.clear();
         }, 1000);
+
+        this.state.post.refresh().then(newPost => this.setState({'post': newPost}))
     }
 
     _funcThen(m) {
@@ -69,8 +71,7 @@ module.exports = class ControlArray extends React.Component {
 
         if (post.saved) {
             post.unsave().then(() => this._funcThen("Unsaved")).catch((e) => this._funcCatch(e, "Failed to unsave", this.save));
-        }
-        else {
+        } else {
             post.save().then(() => this._funcThen("Saved")).catch((e) => this._funcCatch(e, "Failed to save", this.save));
         }
     }
@@ -80,8 +81,7 @@ module.exports = class ControlArray extends React.Component {
 
         if (post.hidden) {
             post.unhide().then(() => this._funcThen("Post unhidden")).catch((e) => this._funcCatch(e, "Failed to unhide", this.hide));
-        }
-        else {
+        } else {
             post.hide().then(() => this._funcThen("Post hidden")).catch((e) => this._funcCatch(e, "Failed to hide", this.hide));
         }
     }

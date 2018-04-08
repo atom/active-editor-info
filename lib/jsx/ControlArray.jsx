@@ -16,6 +16,14 @@ class PostFunction extends React.Component {
 
 module.exports = class ControlArray extends React.Component {
 
+    constructor(props){
+        super(props);
+
+        this.state = {
+            post: props.post
+        };
+    }
+
     _clear() {
         setTimeout(() => {
             atom.notifications.clear();
@@ -45,7 +53,7 @@ module.exports = class ControlArray extends React.Component {
     comments() {}
 
     share() {
-        clip("https://reddit.com" + this.props.post.permalink, function(err) {
+        clip("https://reddit.com" + this.state.post.permalink, function(err) {
             if (err) {
                 atom.notifications.addError("Failed to copy permalink to clipboard", {
                     buttons: [
@@ -91,7 +99,7 @@ module.exports = class ControlArray extends React.Component {
     crosspost() {}
 
     render() {
-        const post = this.props.post;
+        const post = this.state.post;
         return (<ul>
             <PostFunction text={`${post.num_comments} comments`} onClick={this.comments}/>
             <PostFunction text="share" onClick={this.share}/>

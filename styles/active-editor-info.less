@@ -6,6 +6,8 @@
 
 .active-editor-info {
 
+    background-color: @base-background-color !important;
+
     ul {
         list-style-type: none;
     }
@@ -13,11 +15,11 @@
     .grid-container {
         display: grid;
         margin: 10px;
-        background-color: @base-background-color;
+        background-color: lighten(@base-background-color, 5%);
         border: 2px solid @base-border-color;
         border-radius: @component-border-radius * 5;
         color: @text-color;
-        grid-template-columns: 7% 12% 12% auto auto auto auto 20%;
+        grid-template-columns: 7% 11% 11% auto auto auto auto 20%;
 
         .thumbnail {
             grid-column: 2 / span 2;
@@ -65,8 +67,8 @@
                     button {
                         margin: 5px;
                         color: @text-color-highlight;
-                        background-color: @button-background-color;
-                        border: 1px solid @button-border-color;
+                        background-color: lighten(@base-background-color, 5%);
+                        border: none;
                         font-size: @font-size;
 
                         &:hover {

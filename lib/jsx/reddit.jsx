@@ -11,7 +11,6 @@ class PostListItem extends React.Component {
         super(props);
 
         this.state = {
-            'snoowrap': props.snoowrap,
             'post': props.post
         };
     }
@@ -45,20 +44,17 @@ class PostListItem extends React.Component {
     }
 }
 
-class PostList extends React.Component {
+function List(props) {
+    console.log("Rendered post list", this.props);
+    var list = props.posts.map(post => {
+        return (<li>
+            <PostListItem post={post}></PostListItem>
+        </li>);
+    });
 
-    render() {
-        console.log("Rendered post list", this.props);
-        var list = this.props.list.map(post => {
-            return (<li>
-                <PostListItem post={post} snoowrap={this.props.snoowrap}></PostListItem>
-            </li>)
-        });
-
-        return (<ul>
-            {list}
-        </ul>);
-    }
+    return (<ul>
+        {list}
+    </ul>);
 }
 
 module.exports = class Reddit extends React.Component {
@@ -86,7 +82,7 @@ module.exports = class Reddit extends React.Component {
         console.log("Rendered reddit", this.state);
         return (<div>
             <h1>Reddit - Hot</h1>
-            <PostList list={this.state.list} snoowrap={this.state.snoowrap}/>
+            <List posts={this.state.list}/>
         </div>);
     }
 };
